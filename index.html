@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Meri Maalkin Maazi Rani Maazi Queen Maazi Siya Anurag Narute !</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            background: #0a0a0c;
+            color: #e2e8f0;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Fixed Background Layers */
+        .glow-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+            z-index: -2;
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none; /* Allows clicks to pass through */
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 450px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: none;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            z-index: 50; /* Higher than background */
+        }
+
+        .active { display: block; }
+
+        .btn-main {
+            background: linear-gradient(90deg, #ec4899, #8b5cf6);
+            padding: 16px 45px;
+            border-radius: 100px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 1.5rem;
+            display: inline-block;
+            cursor: pointer;
+            color: white;
+            border: none;
+            box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+            user-select: none;
+        }
+
+        .btn-main:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(236, 72, 153, 0.5);
+        }
+
+        .btn-main:active {
+            transform: scale(0.95);
+        }
+
+        .hinglish-title {
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(to right, #f472b6, #fb7185);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+        }
+
+        .bento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .bento-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .polaroid {
+            background: white;
+            padding: 10px 10px 35px;
+            transform: rotate(-2deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            margin: 15px auto;
+            width: 200px;
+        }
+
+        .polaroid img { width: 100%; height: 180px; object-fit: cover; }
+    </style>
+</head>
+<body>
+
+    <div class="glow-bg"></div>
+    <div class="cursor-glow" id="glow"></div>
+
+    <div id="wrapper">
+        <div id="s1" class="glass-card active">
+            <span class="text-6xl mb-4 block">❤️</span>
+            <h1 class="text-3xl font-extrabold mb-4">Huiiii Maalkin bai !!</h1>
+            <p class="text-gray-400 text-sm">Aaj aapka birthday hai, toh maine socha kuch special karte hain. Ek chhoti si duniya banayi hai aapke liye... dekhna chahogi?</p>
+            <button onclick="move(2)" class="btn-main">CLICK HERE MERE RANI !</button>
+        </div>
+
+        <div id="s2" class="glass-card">
+            <h1 class="hinglish-title mb-4">Happy Birthday MAZI SIYA ANURAG NARUTE !!!!</h1>
+            <p class="text-gray-300 text-sm">Maazi kuchupuchu maalkin, meri pyari bayko... aapka hona hi mere liye sabse bada gift hai. Main kitna lucky hoon ki aap meri life mein ho.</p>
+            <button onclick="move(3)" class="btn-main">AUR ISKE AAGE ?</button>
+        </div>
+
+        <div id="s3" class="glass-card">
+            <h2 class="text-xl font-bold mb-2 text-pink-400">Main bolne lag jau toh zamana kam pad jayega...</h2>
+            <div class="bento text-left">
+                <div class="bento-box col-span-2 italic text-xs">"Aapki khubsurti ki tareef toh meri aakhri saans tak chalti rahegi..."</div>
+                <div class="bento-box text-pink-300"><b>Kindness ✨</b><br>Meri har galti ko maaf karne ke liye.</div>
+                <div class="bento-box text-blue-300"><b>Perfect 😊</b><br>Aapki smile jo mera din bana deti hai.</div>
+            </div>
+            <button onclick="move(4)" class="btn-main">YAAD HAI YEH?</button>
+        </div>
+
+        <div id="s4" class="glass-card">
+            <h2 class="text-xl font-bold">The Morning of April... ☀️</h2>
+            <div class="polaroid">
+                <img src="https://i.pinimg.com/1200x/16/3d/f9/163df9a1ba85c0c7785b14013a8cc056.jpg" alt="Memory">
+                <p class="text-black font-bold mt-2 text-xs">Hamare story ki starting !!! YAYYY !!</p>
+            </div>
+            <p class="text-gray-400 text-[10px] mt-2 leading-relaxed">Subah ke 8 baje... aapka woh comment... khikhikhiki! Tab kisne socha tha ki hum aaj **Shaadishuda** honge? ❤️</p>
+            <button onclick="move(5)" class="btn-main">ONE LAST THING...</button>
+        </div>
+
+        <div id="s5" class="glass-card">
+            <span class="text-6xl block mb-4">🎂</span>
+            <h1 class="text-2xl font-bold mb-4">Meri  BAS Ek Dua Hai</h1>
+            <p class="text-gray-300 text-sm">Aapka har saal pichle se laakh guna behtar ho... aur sabse badi baat, har saal mein **Anurag Narute** hamesha aapke saath ho!</p>
+            <div id="final" class="hidden text-xl font-bold text-pink-500 mt-6">
+                Happy Birthday, My Wifey Siya! 💍❤️
+            </div>
+            <button id="c-btn" onclick="finish()" class="btn-main">CELEBRATE KARO!</button>
+        </div>
+    </div>
+
+    <script>
+        // Cursor Follower
+        const glow = document.getElementById('glow');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(glow, { 
+                x: e.clientX, 
+                y: e.clientY, 
+                duration: 0.5,
+                ease: "power2.out"
+            });
+        });
+
+        // Navigation Function
+        function move(step) {
+            const current = document.querySelector('.glass-card.active');
+            const next = document.getElementById('s' + step);
+
+            if (!next) return;
+
+            gsap.to(current, { 
+                opacity: 0, 
+                scale: 0.8, 
+                y: -30, 
+                duration: 0.4, 
+                onComplete: () => {
+                    current.classList.remove('active');
+                    next.classList.add('active');
+                    gsap.fromTo(next, 
+                        { opacity: 0, scale: 0.9, y: 30 }, 
+                        { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" }
+                    );
+                }
+            });
+        }
+
+        // Finale Blast
+        function finish() {
+            const btn = document.getElementById('c-btn');
+            const finalTxt = document.getElementById('final');
+            
+            btn.style.display = 'none';
+            finalTxt.classList.remove('hidden');
+            
+            gsap.from(finalTxt, { 
+                scale: 0, 
+                duration: 0.8, 
+                ease: "elastic.out(1, 0.3)" 
+            });
+
+            // Realistic Fireworks
+            const duration = 5 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } 
+                }));
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } 
+                }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>
